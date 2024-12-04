@@ -1,0 +1,29 @@
+# Run following command to run this container.
+# docker compose -f PostGreSQLWithNamedVol-Compose.yml up -d
+version: "3.8"
+name: postgresqlcompose
+services:
+  postgresqldb:
+    container_name: postgresdev2
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - nvPostGreSQL:/var/lib/postgresql/data
+  adminer:
+    image: adminer
+    container_name: adminerUI
+    restart: always
+    ports:
+      - 8080:8080
+volumes:
+  nvPostGreSQL:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\PostgreSQLDev
+      o: bind

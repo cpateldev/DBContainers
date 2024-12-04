@@ -1,0 +1,42 @@
+# Run following command to run this container.
+# docker compose -f Oracle21c-Compose.yml up -d
+version: "3.8"
+name: oracledbcompose
+services:
+  oracle-db:
+    container_name: oracle21cdev1
+    image: container-registry.oracle.com/database/enterprise:21.3.0.0
+    environment:
+      - ORACLE_SID=ORCL
+      - ORACLE_PDB=ORCLPDB1
+      - ORACLE_PWD=!MoinMoin015
+    ports:
+      - 1521:1521
+    volumes:
+      - oracle-data:/opt/oracle/oradata
+      - oracle-backup:/opt/oracle/backup
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sqlplus",
+          "-L",
+          "sys/!MoinMoin015@//localhost:1521/ORCL as sysdba",
+          "@healthcheck.sql",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+volumes:
+  oracle-data:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\OracleDBs\OracleDev1\oradata
+      o: bind
+  oracle-backup:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\OracleDBs\OracleDev1\backup
+      o: bind

@@ -1,0 +1,57 @@
+# Run following command to run this container.
+# docker compose -f MySQLDBWithPhpAdminPortalCompose.yml up -d
+#version: "3.8"
+name: MySQLDBWithPhpAdminPortal
+services:
+  MySQLDBDev:
+    container_name: MySQLDB
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+    restart: unless-stopped # no(default),on-failure, always, unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "!SaR00tAdmin"
+      MYSQL_DATABASE: "northwind"
+      MYSQL_USER: sa
+      MYSQL_PASSWORD: "!MoinMoin015"
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./NorthwindMySQL5.sql:/docker-entrypoint-initdb.d/NorthwindMySQL5.sql
+    #  - ./db/my.cnf:/etc/mysql/my.cnf
+    networks:
+      - mysqldb_default
+
+  #  adminerclient:
+  #    container_name: adminerportal
+  #    image: adminer:latest
+  #    environment:
+  #      ADMINER_DEFAULT_SERVER: MySQLDBDev
+  #    ports:
+  #      - 8080:8080
+  #    networks:
+  #      - mysqldb_default
+  # phpmyadmin
+  phpmyadmin:
+    depends_on:
+      - MySQLDBDev
+    container_name: phymyadminportal
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8090:80"
+    environment:
+      PMA_HOST: MySQLDBDev
+      MYSQL_ROOT_PASSWORD: "!SaR00tAdmin"
+    networks:
+      - mysqldb_default
+volumes:
+  mysql_data:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\MySQL\MySQLDev1
+      o: bind
+networks:
+  mysqldb_default:
+    driver: bridge

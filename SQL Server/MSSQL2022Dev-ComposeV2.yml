@@ -1,0 +1,46 @@
+# yaml file version - https://docs.docker.com/compose/compose-file/compose-file-v3/
+# Run following command to run this container.
+# docker compose -f MSSQL2022Dev-ComposeV2.yml up -d
+version: "3.8"
+name: mssqlserver2022compose
+services:
+  mssql:
+    container_name: mssql2022dev
+    hostname: mssql2022dev
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_SA_PASSWORD: "!Sa@dmin"
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: "Developer"
+      MSSQL_TCP_PORT: 1433
+    ports:
+      - "1433:1433"
+    volumes:
+      - mssql_data:/var/opt/mssql/data
+      - mssql_log:/var/opt/mssql/log
+      - mssql_secrets:/var/opt/mssql/secrets
+    networks:
+      - mssqldb_default
+networks:
+  mssqldb_default:
+    driver: bridge
+volumes:
+  mssql_data:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\MSSQL\MSSQL2022Dev\data
+      o: bind
+  mssql_log:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\MSSQL\MSSQL2022Dev\log
+      o: bind
+  mssql_secrets:
+    driver: local # Define the driver and options under the volume name
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\MSSQL\MSSQL2022Dev\secrets
+      o: bind

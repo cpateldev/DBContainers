@@ -1,0 +1,51 @@
+# Run following command to run this container.
+# docker compose -f NorthwindDBWithPGAdminCompose.yml up -d
+name: PostGreSQLDBWithPGAdmin4
+services:
+  PostGreSQL:
+    container_name: postgresdb
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: northwind
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgresqldata:/var/lib/postgresql/data
+      - ./northwind.sql:/docker-entrypoint-initdb.d/northwind.sql
+    ports:
+      - 5432:5432
+    networks:
+      - postgresdb_default
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: postgres
+      PGADMIN_LISTEN_PORT: 5050
+      PGADMIN_CONFIG_SERVER_MODE: "False"
+    volumes:
+      - pgadmin:/var/lib/pgadmin
+    ports:
+      - 5050:5050
+    networks:
+      - postgresdb_default
+
+networks:
+  postgresdb_default:
+    driver: bridge
+
+volumes:
+  postgresqldata:
+    driver: local
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\PostgreSQL
+      o: bind
+  pgadmin:
+    driver: local
+    driver_opts:
+      type: none
+      device: D:\Docker_Shared\pgadmin4
+      o: bind
