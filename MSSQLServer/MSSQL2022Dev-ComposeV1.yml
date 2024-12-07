@@ -1,5 +1,5 @@
 # yaml file version - https://docs.docker.com/compose/compose-file/compose-file-v3/
-version: '3.8'
+##version: '3.8'
 name: mssqlserver2022compose
 services:
   mssql:
