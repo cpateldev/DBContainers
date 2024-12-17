@@ -11,9 +11,9 @@ services:
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=!MoinMoin015
     ports:
-      - 1521:1521
-      - 8080:8080
-      - 5500:5500
+      - 1521:1521      
+      #- 5500:5500
+      #- 8080:8080
     volumes:
       - oracle-data:/opt/oracle/oradata
       - oracle-backup:/opt/oracle/backup
