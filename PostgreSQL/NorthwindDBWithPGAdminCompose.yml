@@ -41,11 +41,11 @@ volumes:
     driver: local
     driver_opts:
       type: none
-      device: D:\Docker_Shared\PostgreSQL
+      device: D:\DockerShared\PostgreSQL
       o: bind
   pgadmin:
     driver: local
     driver_opts:
       type: none
-      device: D:\Docker_Shared\pgadmin4
+      device: D:\DockerShared\pgadmin4
       o: bind
