@@ -4,7 +4,7 @@ version: "3.8"
 name: oracledbcompose
 services:
   oracle-db:
-    container_name: oracle21cdev1
+    container_name: oracle21cdev
     image: container-registry.oracle.com/database/enterprise:21.3.0.0
     environment:
       - ORACLE_SID=ORCL
@@ -12,6 +12,8 @@ services:
       - ORACLE_PWD=!MoinMoin015
     ports:
       - 1521:1521
+      - 8080:8080
+      - 5500:5500
     volumes:
       - oracle-data:/opt/oracle/oradata
       - oracle-backup:/opt/oracle/backup
