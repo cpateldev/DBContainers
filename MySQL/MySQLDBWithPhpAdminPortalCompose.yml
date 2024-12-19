@@ -6,7 +6,7 @@ services:
   MySQLDBDev:
     container_name: MySQLDB
     image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
+    #command: --default-authentication-plugin=mysql_native_password
     restart: unless-stopped # no(default),on-failure, always, unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: "!SaR00tAdmin"
@@ -37,7 +37,7 @@ services:
       - MySQLDBDev
     container_name: phymyadminportal
     image: phpmyadmin
-    restart: always
+    restart: unless-stopped
     ports:
       - "8090:80"
     environment:
@@ -50,7 +50,7 @@ volumes:
     driver: local # Define the driver and options under the volume name
     driver_opts:
       type: none
-      device: D:\Docker_Shared\MySQL\MySQLDev1
+      device: D:\DockerShared\MySQL\MySQLDev1
       o: bind
 networks:
   mysqldb_default:

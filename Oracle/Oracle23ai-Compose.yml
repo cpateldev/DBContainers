@@ -1,18 +1,19 @@
 # Run following command to run this container.
-# docker compose -f Oracle21c-Compose.yml up -d
+# Oracle database 23ai free
+# docker compose -f Oracle23ai-Compose.yml up -d
 version: "3.8"
 name: oracledbcompose
 services:
   oracle-db:
-    container_name: oracle21cdev
-    image: container-registry.oracle.com/database/enterprise:21.3.0.0
+    container_name: oracle23aidev
+    image: container-registry.oracle.com/database/free:latest
     environment:
       - ORACLE_SID=ORCL
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=!MoinMoin015
     ports:
       - 1521:1521      
-      #- 5500:5500
+      - 5500:5500
       #- 8080:8080
     volumes:
       - oracle-data:/opt/oracle/oradata
@@ -34,11 +35,11 @@ volumes:
     driver: local # Define the driver and options under the volume name
     driver_opts:
       type: none
-      device: D:\DockerShared\OracleDBs\OracleDev1\oradata
+      device: D:\DockerShared\OracleDBs\Oracle23aiDev\oradata
       o: bind
   oracle-backup:
     driver: local # Define the driver and options under the volume name
     driver_opts:
       type: none
-      device: D:\DockerShared\OracleDBs\OracleDev1\backup
+      device: D:\DockerShared\OracleDBs\Oracle23aiDev\backup
       o: bind
