@@ -1,8 +1,8 @@
 # Run following command to run this container.
 # Oracle database 23ai free
 # docker compose -f Oracle23ai-Compose.yml up -d
-version: "3.8"
-name: oracledbcompose
+#version: "3.8"
+name: oracle23aidbcompose
 services:
   oracle-db:
     container_name: oracle23aidev
@@ -12,7 +12,7 @@ services:
       - ORACLE_PDB=ORCLPDB1
       - ORACLE_PWD=!MoinMoin015
     ports:
-      - 1521:1521      
+      - 1521:1521
       - 5500:5500
       #- 8080:8080
     volumes:
