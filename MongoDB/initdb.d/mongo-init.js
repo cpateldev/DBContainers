@@ -5,7 +5,7 @@ db.createUser({
     pwd: "ygritte",
     roles: [
       {
-        role: 'readWrite', 
+        role: 'readWrite',
         db: 'got_db'
       },
     ],
