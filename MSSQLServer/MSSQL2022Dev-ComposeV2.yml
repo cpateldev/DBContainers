@@ -1,7 +1,12 @@
 # yaml file version - https://docs.docker.com/compose/compose-file/compose-file-v3/
 # Run following command to run this container.
 # docker compose -f MSSQL2022Dev-ComposeV2.yml up -d
-#version: "3.8"
+# docker compose -f MSSQL2022Dev-ComposeV2.yml down
+# docker compose -f MSSQL2022Dev-ComposeV2.yml logs -f
+# docker compose -f MSSQL2022Dev-ComposeV2.yml exec mssql bash
+# docker compose -f MSSQL2022Dev-ComposeV2.yml exec mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '!Sa@dmin' -Q 'SELECT @@VERSION'
+# docker compose -f MSSQL2022Dev-ComposeV2.yml exec mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '!Sa@dmin' -Q 'SELECT name FROM sys.databases'
+# docker compose -f MSSQL2022Dev-ComposeV2.yml exec mssql /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P '!Sa@dmin' -Q 'CREATE DATABASE TestDB'  
 name: mssqlserver2022compose
 services:
   mssql:
