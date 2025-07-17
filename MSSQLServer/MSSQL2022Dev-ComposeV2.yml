@@ -1,7 +1,8 @@
 # yaml file version - https://docs.docker.com/compose/compose-file/compose-file-v3/
 # Run following command to run this container.
 # docker compose -f MSSQL2022Dev-ComposeV2.yml up -d
-#version: "3.8"
+# docker compose -f MSSQL2022Dev-ComposeV2.yml down
+
 name: mssqlserver2022compose
 services:
   mssql:

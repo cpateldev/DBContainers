@@ -1,6 +1,6 @@
 # Run following command to run this container.
 # docker compose -f Oracle21c-Compose.yml up -d
-version: "3.8"
+#version: "3.8"
 name: oracledbcompose
 services:
   oracle-db:

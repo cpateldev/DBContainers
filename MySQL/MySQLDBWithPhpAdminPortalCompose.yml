@@ -5,9 +5,8 @@ name: MySQLDBWithPhpAdminPortal
 services:
   MySQLDBDev:
     container_name: MySQLDB
-    image: mysql:latest
-    #command: --default-authentication-plugin=mysql_native_password
-    restart: unless-stopped # no(default),on-failure, always, unless-stopped
+    image: mysql:latest    
+    restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: "!SaR00tAdmin"
       MYSQL_DATABASE: "northwind"
@@ -21,17 +20,6 @@ services:
     #  - ./db/my.cnf:/etc/mysql/my.cnf
     networks:
       - mysqldb_default
-
-  #  adminerclient:
-  #    container_name: adminerportal
-  #    image: adminer:latest
-  #    environment:
-  #      ADMINER_DEFAULT_SERVER: MySQLDBDev
-  #    ports:
-  #      - 8080:8080
-  #    networks:
-  #      - mysqldb_default
-  # phpmyadmin
   phpmyadmin:
     depends_on:
       - MySQLDBDev
@@ -47,7 +35,7 @@ services:
       - mysqldb_default
 volumes:
   mysql_data:
-    driver: local # Define the driver and options under the volume name
+    driver: local
     driver_opts:
       type: none
       device: D:\DockerShared\MySQL\MySQLDev1
